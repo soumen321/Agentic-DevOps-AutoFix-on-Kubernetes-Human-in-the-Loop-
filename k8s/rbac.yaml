@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: autofix-agent
+  namespace: autofix-demo
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: autofix-agent-role
+  namespace: autofix-demo
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/log", "events"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: autofix-agent-binding
+  namespace: autofix-demo
+subjects:
+  - kind: ServiceAccount
+    name: autofix-agent
+    namespace: autofix-demo
+roleRef:
+  kind: Role
+  name: autofix-agent-role
+  apiGroup: rbac.authorization.k8s.io

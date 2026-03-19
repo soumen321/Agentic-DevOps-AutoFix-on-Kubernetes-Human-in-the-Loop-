@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fragile-app
+  namespace: autofix-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fragile-app
+  template:
+    metadata:
+      labels:
+        app: fragile-app
+    spec:
+      containers:
+        - name: fragile-app
+          image: techsoumen/fragile-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+
+          # INTENTIONALLY MISSING:
+          # env:
+          #   - name: STRIPE_API_KEY
+          #     value: "sk_test_demo_123"
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10

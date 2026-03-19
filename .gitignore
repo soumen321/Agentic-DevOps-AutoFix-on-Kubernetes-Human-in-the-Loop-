@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# dotenv / secrets
+.env
+.env.*
+!.env.example
+
+# Logs / runtime artifacts
+*.log
+
+# Project generated folders
+approvals/
+audits/
+state/
+
+# Kubernetes local temp files
+*.tmp
+*.bak
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Terraform (if added later)
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+
+# Helm / charts temp
+charts/*.tgz
